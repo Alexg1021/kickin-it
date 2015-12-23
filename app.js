@@ -6,12 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
 
-var app = express();
+var mongoose = require('mongoose');
 
-require('./model/person.js');
+require('./model/user.js');
 mongoose.connect(process.env.MONGO_URI);
-
-
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
