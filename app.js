@@ -9,10 +9,14 @@ var app = express();
 var mongoose = require('mongoose');
 
 require('./model/user.js');
+require('./model/athlete.js');
+require('./model/attendance.js');
 mongoose.connect(process.env.MONGO_URI);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var athletes = require('./routes/athletes');
+var attendees = require('./routes/attendees');
 
 
 
@@ -26,10 +30,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/athletes', athletes);
+app.use('/attendees', attendees);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -21,10 +21,8 @@ var gulp = require('gulp'),
         './public/bower_components/angular/angular.min.js',
         './public/bower_components/angular-ui-router/release/angular-ui-router.min.js',
         './public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-        './public/bower_components/ui-select/dist/select.min.js',
         './public/bower_components/angular-sanitize/angular-sanitize.min.js',
-        './public/bower_components/bootstrap/dist/js/bootstrap.min.js'
-    ])
+        './public/bower_components/bootstrap/dist/js/bootstrap.min.js'    ])
         .pipe(concat('deps.js'))
         .pipe(gulp.dest('./build/js'));
 
@@ -41,9 +39,8 @@ gulp.task('partials', function () {
 gulp.task('css-deps', function () {
     gulp.src([
         "./public/bower_components/bootstrap/dist/css/bootstrap.min.css",
-        "./public/css/stylesheet.css",
+        "./public/bower_components/bootstrap/dist/css/bootstrap.min.css.map",
         "./public/bower_components/font-awesome/css/font-awesome.min.css",
-        "./public/bower_components/ui-select/dist/select.min.css",
         "./public/bower_components/select2/select2.css",
         "./public/bower_components/selectize/dist/css/selectize.default.css"
     ])
