@@ -1,5 +1,6 @@
 <div class="row">
-  <h1>Table</h1>
+  <h1>Users Table</h1>
+  <div><i class="fa fa-plus fa-2x pull-right" data-ng-click="usersController.add()" style="cursor: pointer"></i></div>
 
   <table class="table table-striped">
     <thead>
@@ -8,15 +9,19 @@
         <th>Email</th>
         <th>Phone</th>
         <th>DOB</th>
+        <th>Edit</th>
+        <th>Remove</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr data-ng-repeat="user in usersController.users">
+      <tr data-ng-repeat="user in usersController.users | filter: {deleted_at: '!'}">
         <td>{{user.first_name}} {{user.last_name}}</td>
         <td>{{user.email}}</td>
         <td>{{user.phone}}</td>
         <td>{{user.dob}}</td>
+        <td><i class="fa fa-pencil" style="cursor:pointer" data-ng-click="usersController.edit(user)"></i></td>
+        <td><i class="fa fa-trash" style="cursor:pointer;" data-ng-click="usersController.del(user._id)"></i></td>
       </tr>
     </tbody>
   </table>
