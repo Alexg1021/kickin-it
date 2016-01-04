@@ -38,6 +38,8 @@
 
       /* Add a user with Modal */
       vm.add = function(){
+        vm.scope = $rootScope.$new();
+        vm.scope.user = {};
         vm.openUserModal().then(function(user){
           return $http.post('/users', user)
             .then(function(res){

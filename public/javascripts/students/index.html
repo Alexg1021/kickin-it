@@ -1,0 +1,35 @@
+<div class="row">
+
+    <h1>Students Index Page<span class="pull-right" style="font-size: 12px;"><a data-ui-sref="landing">User Section</a></span></h1>
+    <div><i class="fa fa-plus fa-2x pull-right" data-ng-click="studentsController.add()" style="cursor: pointer"></i></div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>DOB</th>
+          <th>Position</th>
+          <th>Notes</th>
+          <th>Edit</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr data-ng-repeat="student in studentsController.students | filter: {deleted_at: '!'}">
+          <td>{{student.user.first_name}} {{student.user.last_name}}</td>
+          <td>{{student.user.email}}</td>
+          <td>{{student.user.phone}}</td>
+          <td>{{student.user.dob}}</td>
+          <td>{{student.position}}</td>
+          <td>{{student.notes}}</td>
+
+          <td><i class="fa fa-pencil" style="cursor:pointer" data-ng-click="studentsController.edit(student)"></i></td>
+          <td><i class="fa fa-trash" style="cursor:pointer;" data-ng-click="studentsController.del(student._id)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>

@@ -23,6 +23,17 @@
               return Users.get();
             }
             }
+          })
+          .state('students', {
+            url: '/students',
+            templateUrl: 'partials/students/index.html',
+            controller: 'StudentsController',
+            controllerAs: 'studentsController',
+            resolve:{
+              students: function(Students){
+                return Students.get();
+              }
+            }
           });
 
       });
