@@ -1,0 +1,17 @@
+<div>
+  <div class="row">
+    <div class="">
+      <ul class="pull-right">
+        <li style="display: inline"><a data-ui-sref="landing">Users </a>| </li>
+        <li style="display: inline"><a data-ui-sref="students">Students </a>| </li>
+        <li style="display: inline"><a data-ui-sref="groups">Add a Group </a>| </li>
+        <li style="display: inline"><a data-ui-sref="dash">Groups</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+  <li data-ng-repeat="group in groupDash.groups">{{group.name}}</li>
+  </div>
+
+</div>

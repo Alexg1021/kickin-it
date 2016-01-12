@@ -6,7 +6,6 @@
       var vm = this;
 
       vm.student = $scope.student ? $scope.student : {};
-      debugger;
 
       vm.ok = function ok (){
           $uibModalInstance.close(vm.student);

@@ -21,7 +21,7 @@
             resolve:{
               users: function (Users) {
               return Users.get();
-            }
+              }
             }
           })
           .state('students', {
@@ -34,6 +34,40 @@
                 return Students.get();
               }
             }
+          })
+          .state('groups', {
+            url: '/groups',
+            templateUrl: 'partials/groups/index.html',
+            controller: 'GroupsController',
+            controllerAs: 'groupsController',
+            resolve: {
+              groups: function(Groups){
+                return Groups.get();
+              }
+            }
+          })
+          .state('groups.add-roster', {
+            url: '/:groupId',
+            templateUrl: 'partials/groups/add-roster.html',
+            controller: 'RosterController',
+            controllerAs: 'rosterController',
+            resolve: {
+            group: function (Groups, $stateParams, groups) {
+              return Groups.find($stateParams.groupId);
+              }
+            }
+          })
+          .state('dash', {
+            url: '/group-dashboard',
+            templateUrl: 'partials/groups/group-dash.html',
+            controller: 'GroupDashController',
+            controllerAs: 'groupDash',
+            resolve: {
+              groups: function(Groups){
+                return Groups.get();
+              }
+            }
+
           });
 
       });
