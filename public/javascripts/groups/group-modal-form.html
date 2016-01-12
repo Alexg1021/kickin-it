@@ -1,0 +1,36 @@
+<div class="group-modal">
+  <div class="modal-header">
+    <h1>Group Information</h1>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group" name="group-modal">
+      <label for="name">Group Name</label>
+      <input type="text"
+             class="form-control"
+             data-ng-model="groupModal.group.name"
+             id="name"
+             name="name">
+
+      <label for="description">Description</label>
+      <input type="text"
+             class="form-control"
+             data-ng-model="groupModal.group.description"
+             name="description">
+
+       <label for="notes">Notes</label>
+       <input type="text"
+              class="form-control"
+              data-ng-model="groupModal.group.notes"
+              name="notes">
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button ng-click="groupModal.ok()" class="btn btn-primary">Submit</button>
+    <button ng-click="groupModal.cancel()" class="btn btn-warning">Cancel</button>
+  </div>
+
+
+</div>

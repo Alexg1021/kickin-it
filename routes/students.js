@@ -1,8 +1,11 @@
 var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
-  Student = mongoose.model('Student');
-  User = mongoose.model('User');
+  Student = mongoose.model('Student'),
+  _ = require('lodash'),
+  async = require('async'),
+  User = mongoose.model('User'),
+  q = require('q');
 
   router.param('studentId', function(req, res, next, studentId){
     Student.findById(studentId, function(err, student){
@@ -15,25 +18,23 @@ var express = require('express'),
   /* GET and POST user information */
   router.route('/')
     .get(function(req, res){
-      Student.find().populate('user').exec(function(err, students){
+      Student.find().populate('user groups').exec(function(err, students){
         res.json(students);
       });
     })
     .post(function(req, res){
-      var user = new User (req.body.user);
-      user.save(function(){
+        var user = new User(req.body.user);
 
-      })
-        .then(function(user){
+        user.save(function(){
           var student = new Student({
             position: req.body.position,
             notes: req.body.notes,
-            user: user});
+            user: user
+          });
 
           student.save(function(err){
             res.json(student);
           });
-
         });
     });
 

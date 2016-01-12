@@ -1,0 +1,42 @@
+<div data-ui-view>
+  <div class="row">
+  <h1>add your roster here</h1>
+  <div class="col-md-4">
+  <i class="fa fa-plus fa-2x pull left" data-ng-click="rosterController.addStudents(rosterController.student)"
+    style="cursor: pointer"></i>
+  <i class="fa fa-minus fa-2x pull left" data-ng-click="rosterController.removeStudents()"
+    style="cursor: pointer"></i>
+
+  <div data-ng-repeat="student in rosterController.students" class="form-group col-md-12">
+    <h3>{{student.id}}</h3>
+
+  <form class="" method="post">
+    <label class="control-label">First Name</label>
+                <input type="text"
+                       class="form-control"
+                       style="text-transform:capitalize"
+                       placeholder=""
+                       data-ng-model="student.user.first_name"
+                       name=''
+                       id="">
+    <label class="control-label">Last Name</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder=""
+                       data-ng-model="student.user.last_name"
+                       name=""
+                       id="">
+    <label class="control-label">Email</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder=""
+                       data-ng-model="student.email"
+                       name=''
+                       id="">
+                  </form>
+    </div>
+    </div>
+    <div class="btn btn-success col-md-2"
+         data-ng-click="rosterController.add(rosterController.students, rosterController.group)">Submit</div>
+  </div>
+</div>
