@@ -118,6 +118,10 @@ gulp.task('watch', function () {
         gulp.start('css-deps');
     });
 
+    watch(['./public/less/*.less'], function(){
+      gulp.start('less');
+    });
+
 });
 
 gulp.task('default', ['js-deps', 'partials', 'css-deps', 'js', 'less', 'watch', 'serve']);

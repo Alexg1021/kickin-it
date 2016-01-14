@@ -7,12 +7,18 @@
         /*
         Default route
         */
-        $urlRouterProvider.otherwise('/landing');
+        $urlRouterProvider.otherwise('/login');
 
         /**
         *Define our states
         */
         $stateProvider
+          .state('login', {
+            url: '/login',
+            templateUrl: 'partials/login/index.html',
+            controller: 'LoginController',
+            controllerAs: 'loginController'
+          })
           .state('landing', {
             url: '/landing',
             templateUrl: 'partials/users/index.html',
@@ -67,9 +73,6 @@
                 return Groups.get();
               }
             }
-
           });
-
       });
-
 }());
