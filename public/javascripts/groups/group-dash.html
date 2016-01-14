@@ -10,8 +10,15 @@
     </div>
   </div>
 
-  <div>
-  <li data-ng-repeat="group in groupDash.groups">{{group.name}}</li>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 groups-card">
+    <div data-ng-repeat="group in groupDash.groups">
+    <ul>
+      <li style="list-style-type: none">{{group.name}}</li>
+    </ul>
+    </div>
+
   </div>
+</div>
 
 </div>
