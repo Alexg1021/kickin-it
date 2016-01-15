@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app', ['ui.router', 'app.ui', 'ui.bootstrap'])
-      .config(function($stateProvider, $urlRouterProvider){
+      .config(function($stateProvider, $urlRouterProvider, $httpProvider){
         /*
         Default route
         */
@@ -28,7 +28,10 @@
               users: function (Users) {
               return Users.get();
               }
-            }
+            },
+            data: {
+            requiresLogin: true
+          }
           })
           .state('students', {
             url: '/students',
@@ -39,7 +42,10 @@
               students: function(Students){
                 return Students.get();
               }
-            }
+            },
+            data: {
+            requiresLogin: true
+          }
           })
           .state('groups', {
             url: '/groups',
@@ -50,7 +56,10 @@
               groups: function(Groups){
                 return Groups.get();
               }
-            }
+            },
+            data: {
+            requiresLogin: true
+          }
           })
           .state('groups.add-roster', {
             url: '/:groupId',
@@ -61,7 +70,10 @@
             group: function (Groups, $stateParams, groups) {
               return Groups.find($stateParams.groupId);
               }
-            }
+            },
+            data: {
+            requiresLogin: true
+          }
           })
           .state('dash', {
             url: '/group-dashboard',
@@ -72,7 +84,39 @@
               groups: function(Groups){
                 return Groups.get();
               }
+            },
+            data: {
+            requiresLogin: true
             }
           });
+
+          /**
+     * Configure HTTP Interceptors
+     */
+    $httpProvider.interceptors.push(function ($injector) {
+      return {
+        request: function (config) {
+          var Users = $injector.get('Users');
+          if (Users.isLoggedIn()) config.headers.Authorization = 'Token ' + Users.currentUserToken;
+          return config;
+        }
+      };
+    });
+      })
+      .run(function ($rootScope, Users, $state, storage) {
+      $rootScope.$on('$stateChangeStart', function (event, toState) {
+        if (toState.data && toState.data.requiresLogin) {
+          if (!Users.isLoggedIn()) {
+            event.preventDefault();
+            $state.go('login');
+          }
+        }
       });
+
+      Users.stayLoggedIn();
+
+      if (!Users.currentUser || !Users.currentUserToken) {
+        $state.go('login');
+      }
+    });
 }());

@@ -2,9 +2,13 @@
   'use strict';
 
   angular.module('app')
-    .service('Users', function($http, $uibModal, $rootScope){
+    .service('Users', function($http, $uibModal, $rootScope, $state, storage){
       var vm = this;
+      vm.currentUser = null;
+      vm.currentUserToken = null;
+
       vm.users = [];
+
 
       /**
        * Find a user in the users list.
@@ -89,6 +93,53 @@
           }, function(err){
             console.error(err);
           });
+      };
+
+      /**
+       * Login a user with the provided credentials.
+       * @param creds
+       * @returns {*}
+       */
+      vm.login = function login(creds) {
+        return $http.post('/login', creds)
+          .then(function (res) {
+            vm.currentUser = res.data.user;
+            vm.currentUserToken = res.data.token;
+            $rootScope.currentUser = vm.currentUser;
+            storage.set('token', res.data.token);
+            storage.set('currentUser', res.data.user);
+            return vm.currentUser;
+          });
+      };
+
+      /**
+       *
+       * @returns {boolean}
+       */
+      vm.isLoggedIn = function isLoggedIn() {
+        return !!vm.currentUser;
+      };
+
+      /**
+       *
+       * @param creds
+       */
+      vm.stayLoggedIn = function stayLoggedIn() {
+        vm.currentUser = storage.get('currentUser');
+        vm.currentUserToken = storage.get('token');
+        $rootScope.currentUser = vm.currentUser;
+      };
+
+      /**
+       * Log out a user.
+       */
+      vm.logout = function logout() {
+        vm.currentUser = null;
+        vm.currentUserToken = null;
+        $rootScope.currentUser = null;
+        storage.forget('currentUser');
+        storage.forget('token');
+        $state.go('login');
       };
 
     });
