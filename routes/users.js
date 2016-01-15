@@ -1,7 +1,9 @@
 var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  jwt = require('../modules/jwt.js'),
+  _ = require('lodash');
 
   router.param('userId', function(req, res, next, userId){
     User.findById(userId, function(err, user){
