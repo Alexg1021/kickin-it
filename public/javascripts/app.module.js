@@ -19,8 +19,8 @@
             controller: 'LoginController',
             controllerAs: 'loginController'
           })
-          .state('landing', {
-            url: '/landing',
+          .state('users', {
+            url: '/users',
             templateUrl: 'partials/users/index.html',
             controller: 'UsersController',
             controllerAs: 'usersController',
@@ -47,11 +47,11 @@
             requiresLogin: true
           }
           })
-          .state('groups', {
-            url: '/groups',
-            templateUrl: 'partials/groups/index.html',
-            controller: 'GroupsController',
-            controllerAs: 'groupsController',
+          .state('add-group', {
+            url: '/add-group',
+            templateUrl: 'partials/groups/add-group.html',
+            controller: 'AddGroupController',
+            controllerAs: 'addGroup',
             resolve: {
               groups: function(Groups){
                 return Groups.get();
@@ -59,9 +59,9 @@
             },
             data: {
             requiresLogin: true
-          }
+            }
           })
-          .state('groups.add-roster', {
+          .state('add-group.add-roster', {
             url: '/:groupId',
             templateUrl: 'partials/groups/add-roster.html',
             controller: 'RosterController',
@@ -75,11 +75,11 @@
             requiresLogin: true
           }
           })
-          .state('dash', {
-            url: '/group-dashboard',
-            templateUrl: 'partials/groups/group-dash.html',
-            controller: 'GroupDashController',
-            controllerAs: 'groupDash',
+          .state('groups', {
+            url: '/groups',
+            templateUrl: 'partials/groups/groups.html',
+            controller: 'GroupsController',
+            controllerAs: 'groupsController',
             resolve: {
               groups: function(Groups){
                 return Groups.get();

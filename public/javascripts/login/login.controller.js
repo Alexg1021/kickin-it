@@ -8,7 +8,7 @@
       vm.login = function login(creds){
           Users.login(creds).
             then(function(){
-              $state.go('landing');
+              $state.go('users');
             }, function(err){
               vm.loginFailed = true;
             });

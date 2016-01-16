@@ -38,14 +38,14 @@
           });
       };
 
-      vm.add = function(){
+      vm.addGroup = function(){
         vm.scope = $rootScope.$new();
         vm.scope.group = {};
         vm.openGroupModal().then(function(group){
           return $http.post('/groups', group)
           .then(function(res){
             vm.groups.push(res.data);
-            $state.go('groups.add-roster', {'groupId': res.data._id});
+            $state.go('add-group.add-roster', {'groupId': res.data._id});
           }, function (err) {
           console.error(err);
         });
@@ -66,7 +66,7 @@
             group.students = students;
             return $http.put('/groups/' + group._id, group)
               .then(function(){
-                $state.go('dash');
+                $state.go('groups');
             });
           };
 
