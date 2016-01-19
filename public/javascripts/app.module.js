@@ -69,7 +69,7 @@
             resolve: {
             group: function (Groups, $stateParams, groups) {
               return Groups.find($stateParams.groupId);
-              }
+            }
             },
             data: {
             requiresLogin: true
@@ -87,6 +87,20 @@
             },
             data: {
             requiresLogin: true
+            }
+          })
+          .state('groups.group-dashboard', {
+            url: '/:groupId/group-dashboard',
+            templateUrl: 'partials/groups/group-dashboard.html',
+            controller: 'GroupDashboardController',
+            controllerAs: 'groupDash',
+            resolve: {
+            group: function (Groups, $stateParams, groups) {
+              return Groups.find($stateParams.groupId);
+              }
+            },
+            data: {
+              requiresLogin: true
             }
           });
 

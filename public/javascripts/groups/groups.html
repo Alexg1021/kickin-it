@@ -1,9 +1,10 @@
-<div>
+<div data-ui-view>
 <div class="row">
+  <h2>Select your Group</h2>
   <div class="col-md-6 col-md-offset-3 groups-card">
     <div data-ng-repeat="group in groupsController.groups">
     <ul>
-      <li style="list-style-type: none">{{group.name}}</li>
+      <li style="list-style-type: none"><a data-ui-sref="groups.group-dashboard({groupId: group._id})">{{group.name}}</a></li>
     </ul>
     </div>
 

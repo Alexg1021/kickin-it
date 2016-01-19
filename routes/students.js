@@ -18,7 +18,7 @@ var express = require('express'),
   /* GET and POST user information */
   router.route('/')
     .get(function(req, res){
-      Student.find().populate('user groups').exec(function(err, students){
+      Student.find().populate('user group').exec(function(err, students){
         res.json(students);
       });
     })

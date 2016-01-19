@@ -17,6 +17,11 @@
         return _.find(vm.groups, {_id: groupId});
       };
 
+      // vm.findStudents = function findStudents(groupId){
+      //   debugger;
+      //   return _.find(vm.students, {group: groupId});
+      // };
+
       /**
       *Get groups from database and add them to the groups array locally
       */
@@ -39,6 +44,7 @@
       };
 
       vm.addGroup = function(){
+        debugger;
         vm.scope = $rootScope.$new();
         vm.scope.group = {};
         vm.openGroupModal().then(function(group){
@@ -63,12 +69,14 @@
 
 
       vm.addStudents = function(students, group){
+        debugger;
             group.students = students;
             return $http.put('/groups/' + group._id, group)
               .then(function(){
                 $state.go('groups');
             });
           };
+
 
     });
 })();
