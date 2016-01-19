@@ -19,8 +19,8 @@
             controller: 'LoginController',
             controllerAs: 'loginController'
           })
-          .state('landing', {
-            url: '/landing',
+          .state('users', {
+            url: '/users',
             templateUrl: 'partials/users/index.html',
             controller: 'UsersController',
             controllerAs: 'usersController',
@@ -47,9 +47,37 @@
             requiresLogin: true
           }
           })
+          .state('add-group', {
+            url: '/add-group',
+            templateUrl: 'partials/groups/add-group.html',
+            controller: 'AddGroupController',
+            controllerAs: 'addGroup',
+            resolve: {
+              groups: function(Groups){
+                return Groups.get();
+              }
+            },
+            data: {
+            requiresLogin: true
+            }
+          })
+          .state('add-group.add-roster', {
+            url: '/:groupId',
+            templateUrl: 'partials/groups/add-roster.html',
+            controller: 'RosterController',
+            controllerAs: 'rosterController',
+            resolve: {
+            group: function (Groups, $stateParams, groups) {
+              return Groups.find($stateParams.groupId);
+            }
+            },
+            data: {
+            requiresLogin: true
+          }
+          })
           .state('groups', {
             url: '/groups',
-            templateUrl: 'partials/groups/index.html',
+            templateUrl: 'partials/groups/groups.html',
             controller: 'GroupsController',
             controllerAs: 'groupsController',
             resolve: {
@@ -59,34 +87,20 @@
             },
             data: {
             requiresLogin: true
-          }
+            }
           })
-          .state('groups.add-roster', {
-            url: '/:groupId',
-            templateUrl: 'partials/groups/add-roster.html',
-            controller: 'RosterController',
-            controllerAs: 'rosterController',
+          .state('groups.group-dashboard', {
+            url: '/:groupId/group-dashboard',
+            templateUrl: 'partials/groups/group-dashboard.html',
+            controller: 'GroupDashboardController',
+            controllerAs: 'groupDash',
             resolve: {
             group: function (Groups, $stateParams, groups) {
               return Groups.find($stateParams.groupId);
               }
             },
             data: {
-            requiresLogin: true
-          }
-          })
-          .state('dash', {
-            url: '/group-dashboard',
-            templateUrl: 'partials/groups/group-dash.html',
-            controller: 'GroupDashController',
-            controllerAs: 'groupDash',
-            resolve: {
-              groups: function(Groups){
-                return Groups.get();
-              }
-            },
-            data: {
-            requiresLogin: true
+              requiresLogin: true
             }
           });
 

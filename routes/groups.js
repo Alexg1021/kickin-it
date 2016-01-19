@@ -15,7 +15,7 @@ var express = require('express'),
 
   router.route('/')
     .get(function(req, res){
-      Group.find().populate('students user').exec(function(err, groups){
+      Group.find().populate({path: 'students', populate: {path: 'user'}}).exec(function(err, groups){
         res.json(groups);
       });
     })
@@ -31,26 +31,25 @@ var express = require('express'),
 
       var Students = require('../modules/students');
 
-            Students.create(req.body.students)
-              .then(function(studs){
-                req.body.students = studs;
-
-                req.group.update({$set: req.body}, {new: true}, function (err, group) {
-                    res.sendStatus(200);
-                });
-
+      Students.create(req.body.students)
+        .then(function(studs){
+          Students.update(studs, {group:req.group._id})
+            .then(function(){
+              req.body.students = studs;
+              req.group.update({$set:req.body}, {new: true}, function(err, group){
+                res.sendStatus(200);
               });
-
-
-    })
-    .get(function(req, res){
-        res.json(req.group);
-    })
-    .delete(function(req, res){
-        Group.findByIdAndUpdate(req.params.groupId, {$set: {deleted_at: Date.now()}}, function(err){
-            if(err) return res.status(400).json(err);
-            res.sendStatus(200);
+            });
+          });
+        })
+        .get(function(req, res){
+            res.json(req.group);
+        })
+        .delete(function(req, res){
+            Group.findByIdAndUpdate(req.params.groupId, {$set: {deleted_at: Date.now()}}, function(err){
+                if(err) return res.status(400).json(err);
+                res.sendStatus(200);
+            });
         });
-    });
 
 module.exports = router;

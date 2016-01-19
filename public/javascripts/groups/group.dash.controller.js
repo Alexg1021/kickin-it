@@ -2,9 +2,10 @@
   'use strict';
 
   angular.module('app')
-    .controller('GroupDashController', function(groups){
+    .controller('GroupDashboardController', function(group){
       var vm = this;
-      vm.groups = groups;
+      vm.group = group;
+      // vm.students = students;
 
     });
 })();

@@ -1,0 +1,35 @@
+<div>
+  <h1>Group dashboard</h1>
+  <div>{{groupDash.group.name}}</div>
+  <div class="row">
+    <div class="container">
+      <div class="col-md-3">
+        <ul>
+          <li>Edit Group Information</li>
+          <li>Roster</li>
+          <li>Attendance</li>
+        </ul>
+      </div>
+
+      <div class="col-md-9">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Position</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr data-ng-repeat="student in groupDash.group.students">
+              <td>{{student.user.first_name}}</td>
+            </tr>
+          </tbody>
+
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

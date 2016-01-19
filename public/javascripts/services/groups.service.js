@@ -17,6 +17,11 @@
         return _.find(vm.groups, {_id: groupId});
       };
 
+      // vm.findStudents = function findStudents(groupId){
+      //   debugger;
+      //   return _.find(vm.students, {group: groupId});
+      // };
+
       /**
       *Get groups from database and add them to the groups array locally
       */
@@ -38,14 +43,15 @@
           });
       };
 
-      vm.add = function(){
+      vm.addGroup = function(){
+        debugger;
         vm.scope = $rootScope.$new();
         vm.scope.group = {};
         vm.openGroupModal().then(function(group){
           return $http.post('/groups', group)
           .then(function(res){
             vm.groups.push(res.data);
-            $state.go('groups.add-roster', {'groupId': res.data._id});
+            $state.go('add-group.add-roster', {'groupId': res.data._id});
           }, function (err) {
           console.error(err);
         });
@@ -63,12 +69,14 @@
 
 
       vm.addStudents = function(students, group){
+        debugger;
             group.students = students;
             return $http.put('/groups/' + group._id, group)
               .then(function(){
-                $state.go('dash');
+                $state.go('groups');
             });
           };
+
 
     });
 })();
